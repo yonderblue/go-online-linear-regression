@@ -2,7 +2,7 @@
 package regression
 
 import (
-	"github.com/phf/go-queue/queue"
+	"github.com/gaillard/go-queue/queue"
 	"math"
 )
 
