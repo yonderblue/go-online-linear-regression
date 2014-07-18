@@ -38,28 +38,6 @@ func (r *Regression) Calculate() (slope, intercept float64) {
 		return
 	}
 
-	//here to only calc once for performance
-	oldestXAllowed := r.lastX - r.xDelta
-
-	for {
-		pointGeneric := r.points.Front()
-		if pointGeneric == nil {
-			break
-		}
-
-		point := pointGeneric.(point)
-		if point.x >= oldestXAllowed {
-			break
-		}
-
-		r.xSum -= point.x
-		r.ySum -= point.y
-		r.xxSum -= point.xx
-		r.xySum -= point.xy
-
-		r.points.PopFront()
-	}
-
 	n := float64(r.points.Len())
 
 	xSumOverN := r.xSum / n //here to only calc once for performance
@@ -88,4 +66,26 @@ func (r *Regression) Add(x, y float64) {
 	r.ySum += newPoint.y
 	r.xxSum += newPoint.xx
 	r.xySum += newPoint.xy
+
+	//here to only calc once for performance
+	oldestXAllowed := r.lastX - r.xDelta
+
+	for {
+		pointGeneric := r.points.Front()
+		if pointGeneric == nil {
+			break
+		}
+
+		point := pointGeneric.(point)
+		if point.x >= oldestXAllowed {
+			break
+		}
+
+		r.xSum -= point.x
+		r.ySum -= point.y
+		r.xxSum -= point.xx
+		r.xySum -= point.xy
+
+		r.points.PopFront()
+	}
 }
