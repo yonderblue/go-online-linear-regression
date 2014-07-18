@@ -8,7 +8,7 @@ import (
 )
 
 func Example() {
-	r := New(math.MaxFloat64)
+	r := New(7)
 
 	r.Add(1.5, 4.4)
 	r.Add(2.9, 1.56)
@@ -27,8 +27,8 @@ func Example() {
 	//Output:
 	//slope -2.028571
 	//intercept 7.442857
-	//slope 0.834403
-	//intercept 1.717827
+	//slope 1.188768
+	//intercept -1.015158
 }
 
 func TestEmpty(t *testing.T) {
