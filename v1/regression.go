@@ -60,7 +60,8 @@ func (r *Regression) Add(x, y float64) {
 	}
 	r.lastX = x
 
-	newPoint := point{x, y, x * y, x * x}
+	//storing pointers instead of values only for performance
+	newPoint := &point{x, y, x * y, x * x}
 	r.points.PushBack(newPoint)
 	r.xSum += newPoint.x
 	r.ySum += newPoint.y
@@ -76,7 +77,7 @@ func (r *Regression) Add(x, y float64) {
 			break
 		}
 
-		point := pointGeneric.(point)
+		point := pointGeneric.(*point)
 		if point.x >= oldestXAllowed {
 			break
 		}
