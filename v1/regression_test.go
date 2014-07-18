@@ -117,6 +117,21 @@ func TestRepeatY(t *testing.T) {
 	}
 }
 
+func TestAddOld(t *testing.T) {
+	t.Parallel()
+
+	r := New(math.MaxFloat64)
+	r.Add(1, 1)
+
+	defer func() {
+		err := recover()
+		if err == nil {
+			t.Error("did not panic when Add()ing with x less than last x")
+		}
+	}()
+	r.Add(0, 1)
+}
+
 func floatToString(float float64, digitsAfterDecimal int) string {
 	return strconv.FormatFloat(float, 'f', digitsAfterDecimal, 64)
 }
