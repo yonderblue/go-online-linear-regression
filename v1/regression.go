@@ -72,12 +72,9 @@ func (r *Regression) Add(x, y float64) {
 	oldestXAllowed := r.lastX - r.xDelta
 
 	for {
-		pointGeneric := r.points.Front()
-		if pointGeneric == nil {
-			break
-		}
+		point := r.points.Front().(*point)
+		//no need to check for nil since we just did a .PushBack()
 
-		point := pointGeneric.(*point)
 		if point.x >= oldestXAllowed {
 			break
 		}
