@@ -132,6 +132,21 @@ func TestAddOld(t *testing.T) {
 	r.Add(0, 1)
 }
 
+func TestMultipleCalc(t *testing.T) {
+	t.Parallel()
+
+	r := New(math.MaxFloat64)
+	r.Add(1, 1)
+	r.Add(2, 2)
+
+	for i := 0; i < 3; i++ {
+		slope, intercept := r.Calculate()
+		if floatToString(slope, 1) != "1.0" || floatToString(intercept, 1) != "0.0" {
+			t.Errorf("slope, intercept wasn't 1.0, 0.0, was %v, %v", slope, intercept)
+		}
+	}
+}
+
 func floatToString(float float64, digitsAfterDecimal int) string {
 	return strconv.FormatFloat(float, 'f', digitsAfterDecimal, 64)
 }
