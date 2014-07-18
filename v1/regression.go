@@ -50,8 +50,7 @@ func (r *Regression) Calculate() (slope, intercept float64) {
 	return
 }
 
-//Add adds the new x and y as a point into the queue. Will not clear old points
-//until calculation. Panics if given an x value less than the last.
+//Add adds the new x and y as a point into the queue. Panics if given an x value less than the last.
 func (r *Regression) Add(x, y float64) {
 	r.lastCalcFresh = false
 
