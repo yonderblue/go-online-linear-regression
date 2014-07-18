@@ -37,7 +37,7 @@ func TestEmpty(t *testing.T) {
 	r := New(math.MaxFloat64)
 	slope, intercept := r.Calculate()
 	if !math.IsNaN(slope) || !math.IsNaN(intercept) {
-		t.Error(slope, intercept)
+		t.Errorf("slope, intercept wasn't NaN, was %v, %v", slope, intercept)
 	}
 }
 
@@ -48,7 +48,7 @@ func TestSingle(t *testing.T) {
 	r.Add(1.5, 4.4)
 	slope, intercept := r.Calculate()
 	if !math.IsNaN(slope) || !math.IsNaN(intercept) {
-		t.Error(slope, intercept)
+		t.Errorf("slope, intercept wasn't NaN, was %v, %v", slope, intercept)
 	}
 }
 
@@ -59,7 +59,7 @@ func TestZeroDuration(t *testing.T) {
 	r.Add(0, 1)
 	slope, intercept := r.Calculate()
 	if !math.IsNaN(slope) || !math.IsNaN(intercept) {
-		t.Error(slope, intercept)
+		t.Errorf("slope, intercept wasn't NaN, was %v, %v", slope, intercept)
 	}
 }
 
@@ -71,21 +71,21 @@ func TestRemoval(t *testing.T) {
 	r.Add(2, 2)
 	slope, intercept := r.Calculate()
 	if floatToString(slope, 1) != "1.0" || floatToString(intercept, 1) != "0.0" {
-		t.Error(slope, intercept)
+		t.Errorf("slope, intercept wasn't 1.0, 0.0, was %v, %v", slope, intercept)
 	}
 
 	//x 1 should be removed on this Add()
 	r.Add(3, 1)
 	slope, intercept = r.Calculate()
 	if floatToString(slope, 1) != "-1.0" || floatToString(intercept, 1) != "4.0" {
-		t.Error(slope, intercept)
+		t.Errorf("slope, intercept wasn't -1.0, 4.0, was %v, %v", slope, intercept)
 	}
 
 	//same time, no removal
 	r.Add(3, 1)
 	slope, intercept = r.Calculate()
 	if floatToString(slope, 1) != "-1.0" || floatToString(intercept, 1) != "4.0" {
-		t.Error(slope, intercept)
+		t.Errorf("slope, intercept wasn't -1.0, 4.0, was %v, %v", slope, intercept)
 	}
 }
 
@@ -99,7 +99,7 @@ func TestRepeatX(t *testing.T) {
 	r.Add(2, 4)
 	slope, intercept := r.Calculate()
 	if floatToString(slope, 1) != "2.0" || floatToString(intercept, 1) != "-0.5" {
-		t.Error(slope, intercept)
+		t.Errorf("slope, intercept wasn't 2.0, -0.5, was %v, %v", slope, intercept)
 	}
 }
 
@@ -113,7 +113,7 @@ func TestRepeatY(t *testing.T) {
 	r.Add(4, 2)
 	slope, intercept := r.Calculate()
 	if floatToString(slope, 1) != "0.4" || floatToString(intercept, 1) != "0.5" {
-		t.Error(slope, intercept)
+		t.Errorf("slope, intercept wasn't 0.4, -0.5, was %v, %v", slope, intercept)
 	}
 }
 
