@@ -151,6 +151,21 @@ func TestMultipleCalc(t *testing.T) {
 	}
 }
 
+func TestOldCalculate(t *testing.T) {
+	t.Parallel()
+
+	r := New(math.MaxFloat64)
+	r.Add(1, 1)
+	r.Add(2, 4)
+	r.Add(3, 7)
+
+	oldSlope, oldIntercept := r.Calculate()
+	newSlope, newIntercept, _ := r.CalculateWithStdError()
+	if oldSlope != newSlope || oldIntercept != newIntercept {
+		t.Errorf("oldSlope, oldIntercept wasn't newSlope, newIntecept. Old values %v, %v. New values %v, %v", oldSlope, oldIntercept, newSlope, newIntercept)
+	}
+}
+
 func floatToString(float float64, digitsAfterDecimal int) string {
 	return strconv.FormatFloat(float, 'f', digitsAfterDecimal, 64)
 }
