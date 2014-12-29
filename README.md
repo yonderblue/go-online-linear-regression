@@ -19,17 +19,19 @@ func main() {
 
 	r.Add(1.5, 4.4)
 	r.Add(2.9, 1.56)
-	slope, intercept := r.Calculate()
-	
+
+	slope, intercept, stdError := r.CalculateWithStdError()
 	fmt.Printf("slope %f\n", slope)
 	fmt.Printf("intercept %f\n", intercept)
+	fmt.Printf("standard error %f\n", stdError)
 
 	r.Add(7.2, 10.5)
 	r.Add(9, 7.6)
-	slope, intercept = r.Calculate()
-	
+
+	slope, intercept, stdError = r.CalculateWithStdError()
 	fmt.Printf("slope %f\n", slope)
-	fmt.Printf("intercept %f\n ", intercept)
+	fmt.Printf("intercept %f\n", intercept)
+	fmt.Printf("standard error %f\n", stdError)
 }
 ```
 
@@ -37,6 +39,8 @@ Outputs
 ```shell
 slope -2.028571
 intercept 7.442857
+standard error NaN
 slope 1.188768
 intercept -1.015158
+standard error 3.720348
 ```
