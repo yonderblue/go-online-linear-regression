@@ -48,6 +48,9 @@ func (r *Regression) CalculateWithStdError() (slope, intercept, stdError float64
 
 	n := float64(r.points.Len())
 
+	//linear regression formula:
+	//slope is (n*SUM(x*y) - SUM(x)*SUM(y)) / (n*SUM(x*x) - (SUM(x))^2)
+	//intercept is (SUM(y)-slope*SUM(x)) / n
 	xSumOverN := r.xSum / n //here to only calc once for performance
 	slope = (r.xySum - xSumOverN*r.ySum) / (r.xxSum - xSumOverN*r.xSum)
 	intercept = (r.ySum - slope*r.xSum) / n
