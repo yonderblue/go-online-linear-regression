@@ -74,22 +74,22 @@ func TestRemoval(t *testing.T) {
 	r.Add(1, 1)
 	r.Add(2, 2)
 	slope, intercept, stdError := r.CalculateWithStdError()
-	if floatToString(slope, 1) != "1.0" || floatToString(intercept, 1) != "0.0" || !math.IsNaN(stdError) {
-		t.Errorf("slope, intercept, stdError wasn't 1.0, 0.0, NaN, was %v, %v, %v", slope, intercept, stdError)
+	if floatToString(slope, 2) != "1.00" || floatToString(intercept, 2) != "0.00" || !math.IsNaN(stdError) {
+		t.Errorf("slope, intercept, stdError wasn't 1, 0, NaN, was %v, %v, %v", slope, intercept, stdError)
 	}
 
 	//x 1 should be removed on this Add()
 	r.Add(3, 1)
 	slope, intercept, stdError = r.CalculateWithStdError()
-	if floatToString(slope, 1) != "-1.0" || floatToString(intercept, 1) != "4.0" || !math.IsNaN(stdError) {
-		t.Errorf("slope, intercept, stdError wasn't -1.0, 4.0, NaN, was %v, %v, %v", slope, intercept, stdError)
+	if floatToString(slope, 2) != "-1.00" || floatToString(intercept, 2) != "4.00" || !math.IsNaN(stdError) {
+		t.Errorf("slope, intercept, stdError wasn't -1, 4, NaN, was %v, %v, %v", slope, intercept, stdError)
 	}
 
 	//same time, no removal
 	r.Add(3, 1)
 	slope, intercept, stdError = r.CalculateWithStdError()
-	if floatToString(slope, 1) != "-1.0" || floatToString(intercept, 1) != "4.0" || floatToString(stdError, 1) != "0.0" {
-		t.Errorf("slope, intercept, stdError wasn't -1.0, 4.0, 0, was %v, %v, %v", slope, intercept, stdError)
+	if floatToString(slope, 2) != "-1.00" || floatToString(intercept, 2) != "4.00" || floatToString(stdError, 2) != "0.00" {
+		t.Errorf("slope, intercept, stdError wasn't -1, 4, 0, was %v, %v, %v", slope, intercept, stdError)
 	}
 }
 
@@ -102,8 +102,8 @@ func TestRepeatX(t *testing.T) {
 	r.Add(2, 3)
 	r.Add(2, 4)
 	slope, intercept, stdError := r.CalculateWithStdError()
-	if floatToString(slope, 1) != "2.0" || floatToString(intercept, 1) != "-0.5" || floatToString(stdError, 1) != "0.7" {
-		t.Errorf("slope, intercept, stdError wasn't 2.0, -0.5, 0.7, was %v, %v, %v", slope, intercept, stdError)
+	if floatToString(slope, 2) != "2.00" || floatToString(intercept, 3) != "-0.500" || floatToString(stdError, 4) != "0.7071" {
+		t.Errorf("slope, intercept, stdError wasn't 2, -0.5, 0.7, was %v, %v, %v", slope, intercept, stdError)
 	}
 }
 
@@ -116,7 +116,7 @@ func TestRepeatY(t *testing.T) {
 	r.Add(3, 2)
 	r.Add(4, 2)
 	slope, intercept, stdError := r.CalculateWithStdError()
-	if floatToString(slope, 1) != "0.4" || floatToString(intercept, 1) != "0.5" || floatToString(stdError, 1) != "0.3" {
+	if floatToString(slope, 3) != "0.400" || floatToString(intercept, 3) != "0.500" || floatToString(stdError, 4) != "0.3162" {
 		t.Errorf("slope, intercept, stdError wasn't 0.4, -0.5, 0.3, was %v, %v, %v", slope, intercept, stdError)
 	}
 }
@@ -145,8 +145,8 @@ func TestMultipleCalc(t *testing.T) {
 
 	for i := 0; i < 3; i++ {
 		slope, intercept, stdError := r.CalculateWithStdError()
-		if floatToString(slope, 1) != "1.0" || floatToString(intercept, 1) != "0.0" || !math.IsNaN(stdError) {
-			t.Errorf("slope, intercept wasn't 1.0, 0.0, NaN, was %v, %v, %v", slope, intercept, stdError)
+		if floatToString(slope, 2) != "1.00" || floatToString(intercept, 2) != "0.00" || !math.IsNaN(stdError) {
+			t.Errorf("slope, intercept wasn't 1, 0, NaN, was %v, %v, %v", slope, intercept, stdError)
 		}
 	}
 }
